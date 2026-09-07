@@ -1,4 +1,2 @@
-logging:
-  level:
-    root: INFO
-    com.bank: DEBUG
+app:
+  environment: development

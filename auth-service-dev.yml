@@ -1,14 +1,2 @@
-{
-  "name": "auth-service",
-  "profiles": [
-    "dev"
-  ],
-  "propertySources": [
-    {
-      "name": ".../auth-service-dev.yml",
-      "source": {
-        "server.port": 8081
-      }
-    }
-  ]
-}
+auth:
+  profile: dev

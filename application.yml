@@ -1,5 +1,2 @@
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
+app:
+  message: Hello from Config Server
