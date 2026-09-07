@@ -1,0 +1,52 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active:
+      - dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/auth-service
+  data:
+    redis:
+      host: localhost:6371
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - name : RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+          routes:
+            - id: account-service
+              uri: lb://ACCOUNT-SERVICE
+              predicates:
+                - path=/api/account/**
+              filters:
+                - StripPrefix=1
+            - id: transaction-service
+              uri: lb://TRANSACTION-SERVICE
+              predicates:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                   name: transactionCB
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8671/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
