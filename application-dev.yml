@@ -1,25 +1,4 @@
-server:
-  port: 8888
-spring:
-  application:
-    name: config-server
-  security:
-    user:
-      name: configadmi
-      password: config@1234
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/tarun-8067/banking-config-repo
-          default-label: main
-          clone-on-start: true
-          timeout: 10
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-          - health
-          - info
-          - metrics
+logging:
+  level:
+    root: INFO
+    com.bank: DEBUG

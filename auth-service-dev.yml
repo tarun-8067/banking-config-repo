@@ -1,5 +1,14 @@
-spring:
-  application:
-    name: auth-service
-  profiles:
-    active: dev
+{
+  "name": "auth-service",
+  "profiles": [
+    "dev"
+  ],
+  "propertySources": [
+    {
+      "name": ".../auth-service-dev.yml",
+      "source": {
+        "server.port": 8081
+      }
+    }
+  ]
+}
